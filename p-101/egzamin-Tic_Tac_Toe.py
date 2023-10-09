@@ -26,10 +26,10 @@ def check_winner(player, player_numbers):
 def game_options(prompt, option1, option2):
     while True:
         user_input = input(prompt).upper()
-        if user_input in [option1, option2]:            
+        if user_input in [option1, option2]:
             break
         else:
-            print("Wrong input, try again.") 
+            print("Wrong input, try again.")
     return user_input
 def player_field_numbers(player, move):
     if player == 'X':
@@ -39,7 +39,6 @@ def player_field_numbers(player, move):
         player_o_numbers.append(str(move))
         return player_o_numbers
 def make_move(player):
-    print_board()
     while True:
         move = input(f"Player {player} choose board number (1-9): ")
         if move in numbers and (board_numbers[int(move)-1] not in ['X', 'O']):
@@ -49,16 +48,17 @@ def make_move(player):
         else:
             print("Wrong input or field already occupied. Try again!")
     print(f"Player {player} chose {move}")
+    print_board()
     if check_winner(player, player_numbers) == True:
         return True
 def computer_move(computer):
-    print_board()
     move = str(random.choice(board_numbers))
     while move in ['X', 'O']:
         move = str(random.choice(board_numbers))
     board_numbers[int(move)-1] = computer
     player_numbers = player_field_numbers(computer, move)
-    print(f"Computer chose {move}.")    
+    print(f"Computer chose {move}.")
+    print_board()
     if check_winner(computer, player_numbers) == True:
         return True
 print("Welcome to Tic Tac Toe game.")
@@ -68,7 +68,8 @@ if player_one == 'X':
     player_two = 'O'
 else:
     player_two = 'X'
-while True:    
+print_board()
+while True:
     if make_move(player_one) == True:
         break
     if game_type == '2':
